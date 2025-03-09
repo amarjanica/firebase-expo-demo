@@ -28,4 +28,4 @@ I have ideas for future chapters, but I'm open to [suggestions](https://github.c
 ## Chapters
 
 1. Getting started - configuring firebase for expo go, native and web. [Read my article](https://www.amarjanica.com/getting-started-with-firebase-on-expo-go-native-and-web/) or [watch Youtube](https://youtu.be/6uWL5hxK1NM)
-2. Analytics - tracking user events.
+2. Analytics - tracking user events. [Read my article](https://www.amarjanica.com/google-analytics-in-expo-firebase-setup-for-native-and-web/) or [watch Youtube](https://youtu.be/U9HSJesbD9E)
