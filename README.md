@@ -6,21 +6,19 @@ I have ideas for future chapters, but I'm open to [suggestions](https://github.c
 
 ## Get started
 
-1. Obtain your Firebase config
-
+- Obtain your Firebase config
   - Go to the [Firebase Console](https://console.firebase.google.com/)
   - Create a new project
   - Add a web/android/ios app
   - Copy the config object - for Android it's google-services.json, for iOS it's GoogleService-Info.plist.
   - Web related firebase config should be configured through environment variables, in the .env file.
 
-2. Install dependencies
+- Install dependencies
 
    ```bash
    npm install
    ```
-
-3. Start the app
+- Start the app
 
    ```bash
     npx expo start
@@ -29,5 +27,5 @@ I have ideas for future chapters, but I'm open to [suggestions](https://github.c
 
 ## Chapters
 
-1. Getting started - configuring firebase for expo go, native and web. [Youtube](https://youtu.be/6uWL5hxK1NM)
-
+1. Getting started - configuring firebase for expo go, native and web. [Read my article](https://www.amarjanica.com/getting-started-with-firebase-on-expo-go-native-and-web/) or [watch Youtube](https://youtu.be/6uWL5hxK1NM)
+2. Analytics - tracking user events.
