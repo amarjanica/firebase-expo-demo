@@ -1,5 +1,7 @@
 import { getApps, initializeApp } from '@firebase/app';
 import { EventParams, getAnalytics, logEvent, setAnalyticsCollectionEnabled } from '@firebase/analytics';
+import { getAuth } from '@firebase/auth';
+import { FirebaseClient } from '@/firebase/types';
 
 const firebaseConfig = {
   apiKey: process.env.EXPO_PUBLIC_API_KEY,
@@ -17,7 +19,12 @@ const firebaseConfig = {
  */
 const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
 
-const analytics = () => {
+const fbAuth = getAuth(app);
+
+const auth: FirebaseClient['auth'] = () => {
+  return fbAuth as unknown as ReturnType<FirebaseClient['auth']>;
+};
+const analytics: FirebaseClient['analytics'] = () => {
   const fbAnalytics = getAnalytics(app);
   return {
     logScreenView: (params: { [key: string]: any; firebase_screen: EventParams["firebase_screen"]; firebase_screen_class: EventParams["firebase_screen_class"]; } | undefined) => logEvent(fbAnalytics, 'screen_view', params),
@@ -27,7 +34,6 @@ const analytics = () => {
 };
 
 export default {
-  app,
+  auth,
   analytics,
-  running: getApps().length > 0,
-};
+} as unknown as FirebaseClient;

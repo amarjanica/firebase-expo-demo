@@ -1,22 +1,32 @@
-import { Button, Platform, Text, View } from 'react-native';
+import { Button, Text, View } from 'react-native';
 import { useEffect, useState } from 'react';
 import firebase from '@/firebase';
-import Constants from 'expo-constants';
+import GoogleLogin from '@/google-login/GoogleLogin';
+import { type FirebaseAuthTypes } from '@react-native-firebase/auth';
 
 export default function HomeScreen() {
-  const [fbLoaded, setFbLoaded] = useState(false);
-  useEffect(() => {
-    setFbLoaded(firebase.running);
-  }, []);
+  const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
 
-  const handleClick = async () => {
-    await firebase.analytics().logEvent('expo_event', { os: Platform.OS, ownership: Constants.appOwnership ?? 'N/A' });
-  }
+  useEffect(() => {
+    return firebase.auth().onAuthStateChanged((user) => {
+      setUser(user)
+    });
+  }, []);
 
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Firebase Loaded: {fbLoaded ? 'Y': 'N'}, Platform OS: {Platform.OS}, Ownership: {Constants.appOwnership}</Text>
-      <Button title="Click me!" onPress={handleClick} />
+      {
+        user ? (
+          <>
+            <Text>Hi, {user?.displayName}</Text>
+            <Button title="Sign out" onPress={() => firebase.auth().signOut()} />
+          </>
+        ): (
+          <>
+            <GoogleLogin />
+          </>
+        )
+      }
     </View>
   );
 }

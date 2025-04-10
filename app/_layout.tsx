@@ -24,7 +24,9 @@ export default function RootLayout() {
       void firebase.analytics().logScreenView({
         screen_name: pathname,
         screen_class: pathname,
-        params: JSON.stringify(params),
+        firebase_screen: pathname,
+        firebase_screen_class: pathname,
+        params: JSON.stringify(params)
       });
     }
   }, [pathname, params]);
