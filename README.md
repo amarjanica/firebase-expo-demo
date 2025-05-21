@@ -5,6 +5,8 @@ It's a companion project for my blog and YouTube tutorials regarding firebase.
 Each chapter follows a lecture, and I'll update it as I release new content.
 I have ideas for future chapters, but I'm open to [suggestions](https://github.com/amarjanica/firebase-expo-demo/discussions). Let me know what you'd like to see.
 
+<img src="/repo-assets/demo.png" width="250" alt="Demo"/>
+
 ## Get started
 
 - Get Firebase config
@@ -22,7 +24,7 @@ I have ideas for future chapters, but I'm open to [suggestions](https://github.c
 - Start the app
 
    ```bash
-    npx expo start
+    npm run android # or npm run ios
    ```
 
 
@@ -30,7 +32,7 @@ I have ideas for future chapters, but I'm open to [suggestions](https://github.c
 
 1. Getting started - configuring firebase for expo go, native and web. [Read my article](https://www.amarjanica.com/getting-started-with-firebase-on-expo-go-native-and-web/) or [watch Youtube](https://youtu.be/6uWL5hxK1NM)
 2. Analytics - tracking user events. [Read my article](https://www.amarjanica.com/google-analytics-in-expo-firebase-setup-for-native-and-web) or [watch Youtube](https://youtu.be/U9HSJesbD9E)
-3. Google login [watch Youtube](https://youtu.be/RhnmFVDy2mQ)
+3. Google login - [Read my article](https://www.amarjanica.com/making-google-login-work-in-react-native-and-web/) or [watch Youtube](https://youtu.be/RhnmFVDy2mQ)
 
 ### About Expo Go
 In my earlier articles, I did support Expo Go, but I decided to remove it.
