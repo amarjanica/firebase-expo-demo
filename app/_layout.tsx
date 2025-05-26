@@ -8,6 +8,7 @@ import 'react-native-reanimated';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { Platform } from 'react-native';
 import firebase from '@/firebase';
+import { RCProvider } from '@/revenuecat';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -33,7 +34,7 @@ export default function RootLayout() {
 
   useEffect(() => {
     if (loaded) {
-      SplashScreen.hideAsync();
+      void SplashScreen.hideAsync();
     }
   }, [loaded]);
 
@@ -42,13 +43,15 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={DefaultTheme}>
-      <SafeAreaProvider>
-        <SafeAreaView style={{ flex: 1 }}>
-          <Slot/>
-        </SafeAreaView>
-      </SafeAreaProvider>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <RCProvider>
+      <ThemeProvider value={DefaultTheme}>
+        <SafeAreaProvider>
+          <SafeAreaView style={{ flex: 1 }}>
+            <Slot/>
+          </SafeAreaView>
+        </SafeAreaProvider>
+        <StatusBar style="auto" />
+      </ThemeProvider>
+    </RCProvider>
   );
 }

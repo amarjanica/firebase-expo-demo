@@ -3,18 +3,26 @@ import { useEffect, useState } from 'react';
 import firebase from '@/firebase';
 import GoogleLogin from '@/google-login/GoogleLogin';
 import { type FirebaseAuthTypes } from '@react-native-firebase/auth';
+import { router } from 'expo-router';
+import { useRC } from '@/revenuecat';
+import Purchases from 'react-native-purchases';
 
 export default function HomeScreen() {
   const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
-
+  const ctx = useRC();
   useEffect(() => {
-    return firebase.auth().onAuthStateChanged((user) => {
+    return firebase.auth().onAuthStateChanged(async (user) => {
       setUser(user)
+      if (user?.uid) {
+        await Purchases.logIn(user.uid);
+        const customerInfo = await Purchases.getCustomerInfo();
+        ctx.setCustomerInfo(customerInfo)
+      }
     });
   }, []);
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', gap: 8 }}>
       {
         user ? (
           <>
@@ -25,6 +33,15 @@ export default function HomeScreen() {
           <>
             <GoogleLogin />
           </>
+        )
+      }
+      {
+        ctx.isConfigured && (
+          ctx.isSubscriber ? (
+            <Text>You're subscribed</Text>
+          ) : (
+            <Button title="Subscribe" onPress={() => router.push('/subscribe') }/>
+          )
         )
       }
     </View>
