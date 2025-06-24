@@ -9,11 +9,18 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { Platform } from 'react-native';
 import firebase from '@/firebase';
 import { RCProvider } from '@/revenuecat';
+import * as Sentry from '@sentry/react-native';
+
+Sentry.init({
+  dsn: process.env.EXPO_PUBLIC_SENTRY_DSN,
+  debug: __DEV__,
+  environment: __DEV__ ? `development-${Platform.OS}` : `production-${Platform.OS}`,
+});
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
-export default function RootLayout() {
+function RootLayout() {
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
@@ -55,3 +62,5 @@ export default function RootLayout() {
     </RCProvider>
   );
 }
+
+export default Sentry.wrap(RootLayout)

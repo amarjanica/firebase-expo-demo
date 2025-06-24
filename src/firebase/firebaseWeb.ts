@@ -36,4 +36,10 @@ const analytics: FirebaseClient['analytics'] = () => {
 export default {
   auth,
   analytics,
+  crashlytics: ()=>({
+    log: ()=>{},
+    setAttribute: ()=>{},
+    recordError: ()=>{},
+    crash: ()=>{}
+  })
 } as unknown as FirebaseClient;

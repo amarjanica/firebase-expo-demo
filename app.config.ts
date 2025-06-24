@@ -39,6 +39,7 @@ const config: ExpoConfig = {
       },
     ],
     "@react-native-firebase/app",
+    "@react-native-firebase/crashlytics",
     [
       "expo-build-properties",
       {
@@ -46,7 +47,15 @@ const config: ExpoConfig = {
           "useFrameworks": "static"
         }
       }
-    ]
+    ],
+    [
+      '@sentry/react-native/expo',
+      {
+        url: 'https://sentry.io/',
+        organization: process.env.SENTRY_ORGANIZATION,
+        project: process.env.SENTRY_PROJECT,
+      },
+    ],
   ],
   experiments: {
     typedRoutes: true,

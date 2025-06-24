@@ -6,10 +6,20 @@ import { type FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { router } from 'expo-router';
 import { useRC } from '@/revenuecat';
 import Purchases from 'react-native-purchases';
+import * as Sentry from '@sentry/react-native'
 
 export default function HomeScreen() {
   const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
   const ctx = useRC();
+  const handleCrash = ()=> {
+    firebase.crashlytics().log('Something');
+    firebase.crashlytics().setAttribute('testing', __DEV__ ? 'Y': 'N')
+    firebase.crashlytics().crash()
+  }
+  const handleSentry = () => {
+    Sentry.captureException(new Error('test'));
+  }
+
   useEffect(() => {
     return firebase.auth().onAuthStateChanged(async (user) => {
       setUser(user)
@@ -36,7 +46,7 @@ export default function HomeScreen() {
         )
       }
       {
-        ctx.isConfigured && (
+        ctx?.isConfigured && (
           ctx.isSubscriber ? (
             <Text>You're subscribed</Text>
           ) : (
@@ -44,6 +54,8 @@ export default function HomeScreen() {
           )
         )
       }
+      <Button title="Crash" onPress={handleCrash}/>
+      <Button title="Sentry Log" onPress={handleSentry}/>
     </View>
   );
 }

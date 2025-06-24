@@ -1,6 +1,7 @@
 import { getApp } from '@react-native-firebase/app';
 import { logEvent, setAnalyticsCollectionEnabled, getAnalytics } from '@react-native-firebase/analytics';
 import { getAuth } from '@react-native-firebase/auth';
+import crashlytics from '@react-native-firebase/crashlytics';
 
 const app = getApp()
 
@@ -14,4 +15,5 @@ export default {
       logEvent: (event: string, params: Record<string, any>) => logEvent(analytics, event, params),
     };
   },
+  crashlytics,
 };
