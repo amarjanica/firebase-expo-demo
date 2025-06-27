@@ -5,7 +5,6 @@ It's a companion project for my blog and YouTube tutorials regarding firebase.
 Each chapter follows a lecture, and I'll update it as I release new content.
 I have ideas for future chapters, but I'm open to [suggestions](https://github.com/amarjanica/firebase-expo-demo/discussions). Let me know what you'd like to see.
 
-<img src="/repo-assets/demo.png" width="250" alt="Demo"/>
 
 ## Get started
 
@@ -30,9 +29,11 @@ I have ideas for future chapters, but I'm open to [suggestions](https://github.c
 
 ## Chapters
 
-1. Getting started - configuring firebase for expo go, native and web. [Read my article](https://www.amarjanica.com/getting-started-with-firebase-on-expo-go-native-and-web/) or [watch Youtube](https://youtu.be/6uWL5hxK1NM)
-2. Analytics - tracking user events. [Read my article](https://www.amarjanica.com/google-analytics-in-expo-firebase-setup-for-native-and-web) or [watch Youtube](https://youtu.be/U9HSJesbD9E)
-3. Google login - [Read my article](https://www.amarjanica.com/making-google-login-work-in-react-native-and-web/) or [watch Youtube](https://youtu.be/RhnmFVDy2mQ)
+1. [Getting started - configuring firebase for expo go, native and web.](https://www.amarjanica.com/getting-started-with-firebase-on-expo-go-native-and-web/)
+2. [Analytics - tracking user events](https://www.amarjanica.com/google-analytics-in-expo-firebase-setup-for-native-and-web)
+3. [Google login](https://www.amarjanica.com/making-google-login-work-in-react-native-and-web/)
+4. [Monetize app with subscriptions](https://www.amarjanica.com/enable-subscriptions-in-expo-2/)
+5. [Set up Crashlytics and Sentry](https://www.amarjanica.com/how-i-debug-production-bugs-in-react-native/)
 
 ### About Expo Go
 In my earlier articles, I did support Expo Go, but I decided to remove it.
