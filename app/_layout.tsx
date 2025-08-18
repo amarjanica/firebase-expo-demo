@@ -3,7 +3,7 @@ import { useFonts } from 'expo-font';
 import { Slot, useLocalSearchParams, usePathname } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import 'react-native-reanimated';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { Platform } from 'react-native';
@@ -20,13 +20,12 @@ Sentry.init({
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
-function RootLayout() {
+const RootLayout: React.FC = () => {
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
   const pathname = usePathname();
   const params = useLocalSearchParams();
-
   useEffect(() => {
     if (Platform.OS === 'web') {
       void firebase.analytics().logScreenView({
@@ -34,7 +33,7 @@ function RootLayout() {
         screen_class: pathname,
         firebase_screen: pathname,
         firebase_screen_class: pathname,
-        params: JSON.stringify(params)
+        params: JSON.stringify(params),
       });
     }
   }, [pathname, params]);
@@ -50,17 +49,21 @@ function RootLayout() {
   }
 
   return (
-    <RCProvider>
-      <ThemeProvider value={DefaultTheme}>
-        <SafeAreaProvider>
-          <SafeAreaView style={{ flex: 1 }}>
-            <Slot/>
-          </SafeAreaView>
-        </SafeAreaProvider>
-        <StatusBar style="auto" />
-      </ThemeProvider>
-    </RCProvider>
+    <SafeAreaProvider>
+      <SafeAreaView style={{ flex: 1 }}>
+        <RCProvider>
+          <ThemeProvider value={DefaultTheme}>
+            <Slot />
+            <StatusBar style="auto" />
+          </ThemeProvider>
+        </RCProvider>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
-}
+};
 
-export default Sentry.wrap(RootLayout)
+const WrappedRoot = Sentry.wrap(RootLayout);
+
+export default function Layout() {
+  return <WrappedRoot />;
+}

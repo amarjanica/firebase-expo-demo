@@ -1,1 +1,1 @@
-export {default} from './firebaseWeb';
+export { default } from './firebaseWeb';
