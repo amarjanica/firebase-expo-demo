@@ -34,8 +34,10 @@ I have ideas for future chapters, but I'm open to [suggestions](https://github.c
 3. [Google login](https://www.amarjanica.com/making-google-login-work-in-react-native-and-web/)
 4. [Monetize app with subscriptions](https://www.amarjanica.com/enable-subscriptions-in-expo-2/)
 5. [Set up Crashlytics and Sentry](https://www.amarjanica.com/how-i-debug-production-bugs-in-react-native/)
+6. [Enable Push notifications](https://www.amarjanica.com/how-to-set-up-push-notifications-in-expo/)
 
 ### About Expo Go
 In my earlier articles, I did support Expo Go, but I decided to remove it.
 Personally, I don't use it, I use either native builds or bundled development client builds.
 Expo Go doesn't support native modules, so I don't see the point in using it.
+
