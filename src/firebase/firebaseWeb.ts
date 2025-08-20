@@ -27,7 +27,15 @@ const auth: FirebaseClient['auth'] = () => {
 const analytics: FirebaseClient['analytics'] = () => {
   const fbAnalytics = getAnalytics(app);
   return {
-    logScreenView: (params: { [key: string]: any; firebase_screen: EventParams["firebase_screen"]; firebase_screen_class: EventParams["firebase_screen_class"]; } | undefined) => logEvent(fbAnalytics, 'screen_view', params),
+    logScreenView: (
+      params:
+        | {
+            [key: string]: any;
+            firebase_screen: EventParams['firebase_screen'];
+            firebase_screen_class: EventParams['firebase_screen_class'];
+          }
+        | undefined
+    ) => logEvent(fbAnalytics, 'screen_view', params),
     setAnalyticsCollectionEnabled: (enabled: boolean) => setAnalyticsCollectionEnabled(fbAnalytics, enabled),
     logEvent: (event: string, params: Record<string, any>) => logEvent(fbAnalytics, event, params),
   };
@@ -36,10 +44,10 @@ const analytics: FirebaseClient['analytics'] = () => {
 export default {
   auth,
   analytics,
-  crashlytics: ()=>({
-    log: ()=>{},
-    setAttribute: ()=>{},
-    recordError: ()=>{},
-    crash: ()=>{}
-  })
+  crashlytics: () => ({
+    log: () => {},
+    setAttribute: () => {},
+    recordError: () => {},
+    crash: () => {},
+  }),
 } as unknown as FirebaseClient;

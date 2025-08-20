@@ -12,7 +12,8 @@ const GoogleLogin = () => {
     <Button
       disabled={inProgress}
       onPress={onGoogleButtonPress}
-      title="Sign in with Google"/>
+      title="Sign in with Google"
+    />
   );
 };
 

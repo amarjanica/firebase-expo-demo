@@ -5,24 +5,24 @@ import { CustomerInfo } from 'react-native-purchases';
 
 const Page = () => {
   const ctx = useRC();
-  const handleCustomer = ({customerInfo}: {customerInfo: CustomerInfo}) => {
-      ctx.setCustomerInfo(customerInfo)
-      router.push('/')
-  }
+  const handleCustomer = ({ customerInfo }: { customerInfo: CustomerInfo }) => {
+    ctx.setCustomerInfo(customerInfo);
+    router.push('/');
+  };
 
-  if (!ctx.isConfigured){
+  if (!ctx.isConfigured) {
     return null;
   }
 
-  if (ctx.isSubscriber){
-    return <Redirect href="/" />
+  if (ctx.isSubscriber) {
+    return <Redirect href="/" />;
   }
 
   return (
     <RevenueCatUI.Paywall
       onPurchaseCompleted={handleCustomer}
       onRestoreError={(err) => {
-        console.error(err.error, 'restore error')
+        console.error(err.error, 'restore error');
       }}
       onRestoreCompleted={handleCustomer}
       onDismiss={() => {
@@ -39,6 +39,6 @@ const Page = () => {
       }}
     />
   );
-}
+};
 
 export default Page;
