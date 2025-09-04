@@ -33,17 +33,18 @@ If you're interested in a particular tutorial, I'd suggest looking in [Releases]
 As I add new chapters, I refactor and sometimes something older might not work, like react native web if I forget to polyfill it.
 If you notice anything buggy, please report in [Issues](https://github.com/amarjanica/firebase-expo-demo/issues)
 
-1. [Getting started - configuring firebase for expo go, native and web.](https://www.amarjanica.com/getting-started-with-firebase-on-expo-go-native-and-web/)
-2. [Analytics - tracking user events](https://www.amarjanica.com/google-analytics-in-expo-firebase-setup-for-native-and-web)
-3. [Google login](https://www.amarjanica.com/making-google-login-work-in-react-native-and-web/)
-4. [Monetize app with subscriptions](https://www.amarjanica.com/enable-subscriptions-in-expo-2/)
-5. [Set up Crashlytics and Sentry](https://www.amarjanica.com/how-i-debug-production-bugs-in-react-native/)
-6. [Enable Push notifications - Expo](https://www.amarjanica.com/how-to-set-up-push-notifications-in-expo/)
-7. [Send Push notifications from NestJS](https://www.amarjanica.com/server-side-push-notifications-with-nestjs-and-firebase/)
+1. [Getting started - configuring firebase for expo go, native and web.](https://github.com/amarjanica/firebase-expo-demo/tree/v1)
+2. [Analytics - tracking user events](https://github.com/amarjanica/firebase-expo-demo/tree/v2)
+3. [Google login](https://github.com/amarjanica/firebase-expo-demo/tree/v3)
+4. [Monetize app with subscriptions](https://github.com/amarjanica/firebase-expo-demo/tree/v4)
+5. [Set up Crashlytics and Sentry](https://github.com/amarjanica/firebase-expo-demo/tree/v5)
+6. [Enable Push notifications - Expo](https://github.com/amarjanica/firebase-expo-demo/tree/v6)
+7. [Send Push notifications from NestJS](https://github.com/amarjanica/firebase-expo-demo/tree/v7)
 
 ### About Expo Go
 In my earlier articles, I did support Expo Go, but I decided to remove it.
 Personally, I don't use it, I use either native builds or bundled development client builds.
 Expo Go doesn't support native modules, so I don't see the point in using it.
+
 
 
