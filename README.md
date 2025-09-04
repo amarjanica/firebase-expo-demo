@@ -29,7 +29,7 @@ I have ideas for future chapters, but I'm open to [suggestions](https://github.c
 
 ## Chapters
 
-If you're interested in a particular tutorial, I'd suggest looking in [Releases](https://github.com/amarjanica/firebase-expo-demo/releases).
+If you're interested in a particular tutorial, I'd suggest selecting into a tagged commit, chapters below.
 As I add new chapters, I refactor and sometimes something older might not work, like react native web if I forget to polyfill it.
 If you notice anything buggy, please report in [Issues](https://github.com/amarjanica/firebase-expo-demo/issues)
 
@@ -45,6 +45,7 @@ If you notice anything buggy, please report in [Issues](https://github.com/amarj
 In my earlier articles, I did support Expo Go, but I decided to remove it.
 Personally, I don't use it, I use either native builds or bundled development client builds.
 Expo Go doesn't support native modules, so I don't see the point in using it.
+
 
 
 
