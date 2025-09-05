@@ -1,22 +1,22 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import * as admin from 'firebase-admin';
 import * as fs from 'fs';
+import { EnvConfigService } from '../config/env-config.service';
 
 @Injectable()
 export class FirebaseService implements OnModuleInit {
   private app: admin.app.App;
+
+  constructor(private readonly envConfigService: EnvConfigService) {}
   onModuleInit(): any {
-    const serviceAccountPath = './firebase.json';
-    if (!fs.existsSync(serviceAccountPath)) {
-      throw new Error(
-        'Firebase service account file not found at path: ' +
-          serviceAccountPath,
-      );
+    const serviceAccount = this.envConfigService.get('FB_SERVICE_ACCOUNT_PATH');
+
+    if (!fs.existsSync(serviceAccount)) {
+      throw new Error(`Firebase service account file not found at path: ${serviceAccount}!`);
     }
-    const app = admin.initializeApp({
-      credential: admin.credential.cert(serviceAccountPath),
+    this.app = admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
     });
-    this.app = app;
   }
 
   auth(): admin.auth.Auth {
