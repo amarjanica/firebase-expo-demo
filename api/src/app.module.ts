@@ -2,9 +2,16 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { FirebaseModule } from './firebase/firebase.module';
 import { DeviceTokenModule } from './device-token/device-token.module';
+import { ConfigModule } from './config/config.module';
 
 @Module({
-  imports: [FirebaseModule, DeviceTokenModule],
+  imports: [
+    FirebaseModule.forRoot({
+      exclude: ['/api', '/api-json'],
+    }),
+    DeviceTokenModule,
+    ConfigModule,
+  ],
   controllers: [AppController],
   providers: [],
 })

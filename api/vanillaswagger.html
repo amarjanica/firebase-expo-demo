@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Swagger UI</title>
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/swagger-ui-dist/swagger-ui.css" />
+</head>
+<body>
+<div id="swagger-ui"></div>
+
+<script src="https://unpkg.com/swagger-ui-dist/swagger-ui-bundle.js"></script>
+<script src="https://unpkg.com/swagger-ui-dist/swagger-ui-standalone-preset.js"></script>
+<script>
+  window.onload = () => {
+    window.ui = SwaggerUIBundle({
+      url: "http://localhost:3000/api-json",
+      dom_id: '#swagger-ui',
+      presets: [
+        SwaggerUIBundle.presets.apis,
+        SwaggerUIStandalonePreset
+      ],
+      layout: "StandaloneLayout",
+      requestInterceptor: (req) => {
+        if (window.__idToken) {
+          req.headers["Authorization"] = `Bearer ${window.__idToken}`;
+        }
+        return req;
+      },
+    })
+  }
+</script>
+
+<script src="https://www.gstatic.com/firebasejs/12.2.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.2.1/firebase-auth-compat.js"></script>
+
+<script>
+  (function() {
+    function initFirebaseAuth() {
+      console.log('Init firebase auth')
+      var firebaseConfig = {
+        apiKey: process.env.FB_API_KEY,
+        authDomain: process.env.FB_AUTH_DOMAIN,
+        projectId: process.env.FB_PROJECT_ID
+      };
+      firebase.initializeApp(firebaseConfig);
+
+      var auth = firebase.auth();
+      var provider = new firebase.auth.GoogleAuthProvider();
+
+      var bar = document.createElement('div');
+      bar.innerHTML = '<button id="login">Sign in with Google</button>'
+        + '<button id="logout" style="display:none">Sign out</button>'
+        + '<span id="user" style="margin-left:8px;"></span>';
+      bar.style.cssText = 'display:flex;gap:12px;align-items:center;padding:10px 16px;border-bottom:1px solid #eee;';
+      document.body.insertBefore(bar, document.body.firstChild);
+
+      var loginBtn = document.getElementById('login');
+      var logoutBtn = document.getElementById('logout');
+      var userSpan = document.getElementById('user');
+
+      window.__idToken = null;
+
+      loginBtn.onclick = function() { auth.signInWithPopup(provider); };
+      logoutBtn.onclick = function() { auth.signOut(); };
+
+      auth.onAuthStateChanged(function(user) {
+        if (user) {
+          user.getIdToken().then(function(t) {
+            window.__idToken = t;
+          });
+          loginBtn.style.display = 'none';
+          logoutBtn.style.display = 'inline-block';
+          userSpan.textContent = 'Signed in as ' + (user.email || user.uid);
+        } else {
+          window.__idToken = null;
+          loginBtn.style.display = 'inline-block';
+          logoutBtn.style.display = 'none';
+          userSpan.textContent = '';
+        }
+      });
+    }
+    initFirebaseAuth();
+  })();
+</script>
+</body>
+</html>
