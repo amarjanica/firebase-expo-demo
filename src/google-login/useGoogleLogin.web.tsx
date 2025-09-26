@@ -1,5 +1,5 @@
 import firebase from '@/firebase';
-import { signInWithPopup, GoogleAuthProvider } from '@firebase/auth';
+import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import React from 'react';
 
 import { Value } from './types';

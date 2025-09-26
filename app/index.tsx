@@ -1,4 +1,4 @@
-import { Button, Text, View } from 'react-native';
+import { Button, Platform, Text, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import firebase from '@/firebase';
 import GoogleLogin from '@/google-login/GoogleLogin';
@@ -27,9 +27,11 @@ export default function Page() {
     return firebase.auth().onAuthStateChanged(async (user) => {
       setUser(user);
       if (user?.uid) {
-        await Purchases.logIn(user.uid);
-        const customerInfo = await Purchases.getCustomerInfo();
-        ctx.setCustomerInfo(customerInfo);
+        if (Platform.OS !== 'web') {
+          await Purchases.logIn(user.uid);
+          const customerInfo = await Purchases.getCustomerInfo();
+          ctx.setCustomerInfo(customerInfo);
+        }
       }
     });
   }, []);

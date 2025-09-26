@@ -2,10 +2,18 @@ import { getApp } from '@react-native-firebase/app';
 import { logEvent, setAnalyticsCollectionEnabled, getAnalytics } from '@react-native-firebase/analytics';
 import { getAuth } from '@react-native-firebase/auth';
 import crashlytics from '@react-native-firebase/crashlytics';
+import { getMessaging } from '@react-native-firebase/messaging';
 
 const app = getApp();
 
 export default {
+  getDevicePushToken: async (): Promise<string | null> => {
+    await getMessaging().registerDeviceForRemoteMessages();
+    console.debug('APNs token:', await getMessaging().getAPNSToken());
+    const fcm = await getMessaging().getToken();
+    return fcm;
+  },
+  onTokenRefresh: (callback: (token: string) => void) => getMessaging().onTokenRefresh(callback),
   auth: () => getAuth(app),
   analytics: () => {
     const analytics = getAnalytics(app);
