@@ -1,7 +1,8 @@
-import { getApps, initializeApp } from '@firebase/app';
-import { EventParams, getAnalytics, logEvent, setAnalyticsCollectionEnabled } from '@firebase/analytics';
-import { getAuth } from '@firebase/auth';
+import { getApps, initializeApp } from 'firebase/app';
+import { EventParams, getAnalytics, logEvent, setAnalyticsCollectionEnabled } from 'firebase/analytics';
+import { getAuth } from 'firebase/auth';
 import { FirebaseClient } from '@/firebase/types';
+import { getMessaging, getToken } from 'firebase/messaging';
 
 const firebaseConfig = {
   apiKey: process.env.EXPO_PUBLIC_API_KEY,
@@ -41,7 +42,44 @@ const analytics: FirebaseClient['analytics'] = () => {
   };
 };
 
+const messaging = () => {
+  return getMessaging(app);
+};
+
 export default {
+  getDevicePushToken: async (): Promise<string | null> => {
+    const swRegistration = await navigator.serviceWorker.register('/fsw.js');
+    await navigator.serviceWorker.ready;
+
+    await new Promise<void>((resolve, reject) => {
+      const timeout = setTimeout(() => {
+        reject(new Error('Service worker initialization timed out'));
+      }, 5000);
+      const channel = new MessageChannel();
+      channel.port1.onmessage = (event) => {
+        if (event.data && event.data.type === 'FIREBASE_INITIALIZED') {
+          clearTimeout(timeout);
+          if (event.data.error) {
+            console.error('Service worker failed to initialize Firebase:', event.data.error);
+            reject(new Error(event.data.error));
+          } else {
+            console.log('Service worker initialized Firebase successfully');
+            resolve();
+          }
+        } else {
+          console.error('Unexpected message from service worker:', event.data);
+        }
+      };
+
+      swRegistration.active.postMessage({ type: 'INIT_FIREBASE', config: firebaseConfig }, [channel.port2]);
+    });
+
+    return getToken(messaging(), {
+      vapidKey: process.env.EXPO_PUBLIC_VAPID_KEY,
+      serviceWorkerRegistration: swRegistration,
+    });
+  },
+  onTokenRefresh: (callback: (token: string) => void) => {},
   auth,
   analytics,
   crashlytics: () => ({
