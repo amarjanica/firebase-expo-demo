@@ -41,11 +41,13 @@ If you notice anything buggy, please report in [Issues](https://github.com/amarj
 6. [Enable Push notifications - Expo](https://github.com/amarjanica/firebase-expo-demo/tree/v6)
 7. [Send Push notifications from NestJS](https://github.com/amarjanica/firebase-expo-demo/tree/v7)
 8. [Add Google Login to NestJS Swagger UI](https://github.com/amarjanica/firebase-expo-demo/tree/v8)
+9. [Web Push Notifications](https://github.com/amarjanica/firebase-expo-demo/tree/v9)
 
 ### About Expo Go
 In my earlier articles, I did support Expo Go, but I decided to remove it.
 Personally, I don't use it, I use either native builds or bundled development client builds.
 Expo Go doesn't support native modules, so I don't see the point in using it.
+
 
 
 
