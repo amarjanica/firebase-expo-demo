@@ -1,7 +1,7 @@
 import React from 'react';
 
 import useGoogleLogin from './useGoogleLogin';
-import { Button } from 'react-native';
+import { Button } from 'react-native-paper';
 
 const GoogleLogin = () => {
   const { login, inProgress } = useGoogleLogin();
@@ -10,10 +10,11 @@ const GoogleLogin = () => {
   };
   return (
     <Button
+      mode="contained"
       disabled={inProgress}
-      onPress={onGoogleButtonPress}
-      title="Sign in with Google"
-    />
+      onPress={onGoogleButtonPress}>
+      Sign in with Google
+    </Button>
   );
 };
 

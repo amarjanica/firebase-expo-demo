@@ -1,14 +1,13 @@
-import { DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Slot, useLocalSearchParams, usePathname } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { StatusBar } from 'expo-status-bar';
 import React, { useEffect } from 'react';
 import 'react-native-reanimated';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
-import { Platform } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import firebase from '@/firebase';
 import { RCProvider } from '@/revenuecat';
+import ThemedProvider from '@/theme/ThemeProvider';
 import * as Sentry from '@sentry/react-native';
 
 Sentry.init({
@@ -50,12 +49,11 @@ const RootLayout: React.FC = () => {
 
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView style={StyleSheet.absoluteFill}>
         <RCProvider>
-          <ThemeProvider value={DefaultTheme}>
+          <ThemedProvider>
             <Slot />
-            <StatusBar style="auto" />
-          </ThemeProvider>
+          </ThemedProvider>
         </RCProvider>
       </SafeAreaView>
     </SafeAreaProvider>

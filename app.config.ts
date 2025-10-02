@@ -77,6 +77,7 @@ const config: ExpoConfig = {
         iosPermissions: ['Notifications'],
       },
     ],
+    'react-native-edge-to-edge',
   ],
   experiments: {
     typedRoutes: true,

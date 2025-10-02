@@ -1,6 +1,6 @@
 import { getApps, initializeApp } from 'firebase/app';
 import { EventParams, getAnalytics, logEvent, setAnalyticsCollectionEnabled } from 'firebase/analytics';
-import { getAuth } from 'firebase/auth';
+import { getAuth, getIdToken } from 'firebase/auth';
 import { FirebaseClient } from '@/firebase/types';
 import { getMessaging, getToken } from 'firebase/messaging';
 
@@ -88,4 +88,11 @@ export default {
     recordError: () => {},
     crash: () => {},
   }),
+  getIdToken: async (forceRefresh = false): Promise<string> => {
+    const user = fbAuth.currentUser;
+    if (!user) {
+      throw new Error('No user is signed in');
+    }
+    return getIdToken(user, forceRefresh);
+  },
 } as unknown as FirebaseClient;
