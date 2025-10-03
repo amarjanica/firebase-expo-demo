@@ -2,12 +2,15 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { EnvConfigService } from './config/env-config.service';
+import { EventAdapter } from './event/event.adapter';
+import { FirebaseService } from './firebase/firebase.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(EnvConfigService);
+  app.useWebSocketAdapter(new EventAdapter(app, app.get(FirebaseService)));
   app.enableCors({
-    origin: (origin, cb) => cb(null, true), // Reflects the requesting origin
+    origin: ['http://localhost:8081'],
     credentials: true,
   });
   const config = new DocumentBuilder()

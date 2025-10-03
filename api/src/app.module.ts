@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { FirebaseModule } from './firebase/firebase.module';
 import { DeviceTokenModule } from './device-token/device-token.module';
 import { ConfigModule } from './config/config.module';
+import { EventModule } from './event/event.module';
 
 @Module({
   imports: [
@@ -11,8 +12,8 @@ import { ConfigModule } from './config/config.module';
     }),
     DeviceTokenModule,
     ConfigModule,
+    EventModule,
   ],
   controllers: [AppController],
-  providers: [],
 })
 export class AppModule {}

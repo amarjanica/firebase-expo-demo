@@ -1,6 +1,6 @@
 import { getApp } from '@react-native-firebase/app';
 import { logEvent, setAnalyticsCollectionEnabled, getAnalytics } from '@react-native-firebase/analytics';
-import { getAuth } from '@react-native-firebase/auth';
+import { getAuth, getIdToken } from '@react-native-firebase/auth';
 import crashlytics from '@react-native-firebase/crashlytics';
 import { getMessaging } from '@react-native-firebase/messaging';
 
@@ -12,6 +12,13 @@ export default {
     console.debug('APNs token:', await getMessaging().getAPNSToken());
     const fcm = await getMessaging().getToken();
     return fcm;
+  },
+  getIdToken: async (forceRefresh = false): Promise<string> => {
+    const user = getAuth(app).currentUser;
+    if (!user) {
+      throw new Error('No user is signed in');
+    }
+    return getIdToken(user, forceRefresh);
   },
   onTokenRefresh: (callback: (token: string) => void) => getMessaging().onTokenRefresh(callback),
   auth: () => getAuth(app),
