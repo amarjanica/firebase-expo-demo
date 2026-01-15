@@ -2,13 +2,13 @@ import { Platform, ScrollView, StyleSheet, View } from 'react-native';
 import { Text, Button, useTheme, Divider } from 'react-native-paper';
 import React, { useEffect, useState } from 'react';
 import firebase from '@/firebase';
-import GoogleLogin from '@/google-login/GoogleLogin';
 import { type FirebaseAuthTypes } from '@react-native-firebase/auth';
 import { router } from 'expo-router';
 import { useRC } from '@/revenuecat';
 import useDeviceToken from '@/push-notifications/useDeviceToken';
 import Purchases from 'react-native-purchases';
 import WebsocketConnections from '@/websockets/WebsocketConnections';
+import LoginScreen from '@/auth/LoginScreen';
 
 const Dashboard: React.FC<{ user: FirebaseAuthTypes.User }> = ({ user }) => {
   return (
@@ -46,7 +46,7 @@ export default function Page() {
 
   return (
     <ScrollView contentContainerStyle={[styles.root, { backgroundColor: theme.colors.background }]}>
-      {user ? <Dashboard user={user} /> : <GoogleLogin />}
+      {user ? <Dashboard user={user} /> : <LoginScreen />}
       {rc?.isConfigured &&
         (rc.isSubscriber ? (
           <Text>You're subscribed</Text>

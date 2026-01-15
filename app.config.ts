@@ -16,6 +16,7 @@ const config: ExpoConfig = {
     },
   },
   ios: {
+    usesAppleSignIn: true,
     googleServicesFile: './GoogleService-Info.plist',
     bundleIdentifier: 'com.amarjanica.firebaseexpodemo',
     supportsTablet: true,
@@ -63,7 +64,7 @@ const config: ExpoConfig = {
       },
     ],
     [
-      '@sentry/react-native/expo',
+      '@sentry/react-native',
       {
         url: 'https://sentry.io/',
         organization: process.env.SENTRY_ORGANIZATION,
@@ -78,6 +79,7 @@ const config: ExpoConfig = {
       },
     ],
     'react-native-edge-to-edge',
+    'expo-apple-authentication',
   ],
   experiments: {
     typedRoutes: true,
