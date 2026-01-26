@@ -9,6 +9,7 @@ import useDeviceToken from '@/push-notifications/useDeviceToken';
 import Purchases from 'react-native-purchases';
 import WebsocketConnections from '@/websockets/WebsocketConnections';
 import LoginScreen from '@/auth/LoginScreen';
+import VerifyRecaptcha from '@/recaptcha/VerifyRecaptcha';
 
 const Dashboard: React.FC<{ user: FirebaseAuthTypes.User }> = ({ user }) => {
   return (
@@ -57,6 +58,7 @@ export default function Page() {
             Subscribe
           </Button>
         ))}
+      <VerifyRecaptcha />
     </ScrollView>
   );
 }
