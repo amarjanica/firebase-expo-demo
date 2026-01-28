@@ -10,6 +10,11 @@ import { RCProvider } from '@/revenuecat';
 import ThemedProvider from '@/theme/ThemeProvider';
 import * as Sentry from '@sentry/react-native';
 
+import { connectFunctionsEmulator, getFunctions } from '@react-native-firebase/functions';
+
+const host = Platform.OS === 'android' ? '10.0.2.2' : 'localhost';
+connectFunctionsEmulator(getFunctions(), host, 5001);
+
 Sentry.init({
   dsn: process.env.EXPO_PUBLIC_SENTRY_DSN,
   debug: __DEV__,

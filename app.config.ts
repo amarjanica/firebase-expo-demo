@@ -1,3 +1,4 @@
+import 'tsx/cjs';
 import { ExpoConfig } from '@expo/config-types';
 
 const config: ExpoConfig = {
@@ -28,7 +29,7 @@ const config: ExpoConfig = {
     },
   },
   android: {
-    package: 'com.amarjanica.firebasexpodemo',
+    package: 'com.amarjanica.firebaseexpodemo',
     googleServicesFile: './google-services.json',
     adaptiveIcon: {
       foregroundImage: './assets/images/adaptive-icon.png',
@@ -80,6 +81,7 @@ const config: ExpoConfig = {
     ],
     'react-native-edge-to-edge',
     'expo-apple-authentication',
+    ['./plugins/withAndroidDesugaring.ts', { desugarVersion: '2.1.3' }],
   ],
   experiments: {
     typedRoutes: true,

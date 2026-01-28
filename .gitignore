@@ -44,4 +44,6 @@ ios/
 android/
 
 .idea/
+.firebaserc
 
+*.log

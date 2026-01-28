@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+
 export const envSchema = z.object({
   FB_SERVICE_ACCOUNT_PATH: z.string(),
   FB_API_KEY: z.string(),
