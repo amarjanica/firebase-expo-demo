@@ -4,15 +4,19 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { EnvConfigService } from './config/env-config.service';
 import { EventAdapter } from './event/event.adapter';
 import { FirebaseService } from './firebase/firebase.service';
+import { ErrorsFilter } from './errors';
+import { NestExpressApplication } from '@nestjs/platform-express';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
   const configService = app.get(EnvConfigService);
   app.useWebSocketAdapter(new EventAdapter(app, app.get(FirebaseService)));
+  app.useGlobalFilters(new ErrorsFilter());
   app.enableCors({
     origin: ['http://localhost:8081'],
     credentials: true,
   });
+  app.set('trust proxy', 'loopback');
   const config = new DocumentBuilder()
     .setTitle('API Spec')
     .setDescription('Demo API for firebase-expo-demo app')

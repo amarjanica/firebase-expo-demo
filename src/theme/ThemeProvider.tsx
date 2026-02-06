@@ -7,7 +7,7 @@ const ModeContext = React.createContext({
   toggleMode: () => {},
 });
 const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [mode, setMode] = React.useState<'light' | 'dark'>('dark');
+  const [mode, setMode] = React.useState<'light' | 'dark'>('light');
 
   return (
     <ModeContext.Provider
@@ -16,7 +16,7 @@ const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
         toggleMode: () => setMode((prev) => (prev === 'light' ? 'dark' : 'light')),
       }}>
       <SystemBars style={mode} />
-      <PaperProvider theme={mode === 'light' ? MD3DarkTheme : MD3DarkTheme}>{children}</PaperProvider>
+      <PaperProvider theme={mode === 'light' ? MD3LightTheme : MD3DarkTheme}>{children}</PaperProvider>
     </ModeContext.Provider>
   );
 };

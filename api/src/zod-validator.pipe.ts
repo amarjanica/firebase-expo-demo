@@ -1,9 +1,5 @@
-import {
-  BadRequestException,
-  Injectable,
-  PipeTransform,
-} from '@nestjs/common';
-import { ZodError, ZodType } from 'zod';
+import { BadRequestException, Injectable, PipeTransform } from '@nestjs/common';
+import { ZodError, ZodType, treeifyError } from 'zod';
 
 @Injectable()
 export class ZodValidatorPipe implements PipeTransform {
@@ -21,11 +17,6 @@ export class ZodValidatorPipe implements PipeTransform {
   }
 
   private formatErrors(error: ZodError) {
-    const { fieldErrors, formErrors } = error.flatten();
-
-    return {
-      fieldErrors,
-      formErrors,
-    };
+    return treeifyError(error);
   }
 }
