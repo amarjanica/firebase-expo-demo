@@ -1,5 +1,5 @@
 import { useFonts } from 'expo-font';
-import { Slot, useLocalSearchParams, usePathname } from 'expo-router';
+import { useLocalSearchParams, usePathname } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import React, { useEffect } from 'react';
 import 'react-native-reanimated';
@@ -11,6 +11,7 @@ import ThemedProvider from '@/theme/ThemeProvider';
 import * as Sentry from '@sentry/react-native';
 
 import { connectFunctionsEmulator, getFunctions } from '@react-native-firebase/functions';
+import { Drawer } from 'expo-router/drawer';
 
 const host = Platform.OS === 'android' ? '10.0.2.2' : 'localhost';
 connectFunctionsEmulator(getFunctions(), host, 5001);
@@ -57,7 +58,29 @@ const RootLayout: React.FC = () => {
       <SafeAreaView style={StyleSheet.absoluteFill}>
         <RCProvider>
           <ThemedProvider>
-            <Slot />
+            <Drawer>
+              <Drawer.Screen
+                name="index"
+                options={{
+                  drawerLabel: 'Home',
+                  title: 'Overview',
+                }}
+              />
+              <Drawer.Screen
+                name="contact"
+                options={{
+                  drawerLabel: 'Contact',
+                  title: 'Contact',
+                }}
+              />
+              <Drawer.Screen
+                name="subscribe"
+                options={{
+                  drawerLabel: 'Subscribe',
+                  title: 'Subscribe',
+                }}
+              />
+            </Drawer>
           </ThemedProvider>
         </RCProvider>
       </SafeAreaView>
